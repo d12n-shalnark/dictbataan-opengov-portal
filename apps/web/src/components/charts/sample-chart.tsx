@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import {
   BarChart,
   Bar,
@@ -7,14 +8,25 @@ import {
   ResponsiveContainer
 } from "recharts"
 
-const data = [
-  { name: "Balanga", population: 104000 },
-  { name: "Orani", population: 70000 },
-  { name: "Hermosa", population: 65000 },
-  { name: "Dinalupihan", population: 118000 },
-]
+import { fetchGoogleSheet } from "@/services/api"
+import type { PopulationRecord } from "@repo/types"
 
 export default function SampleChart() {
+  const [data, setData] = useState<PopulationRecord[]>([])
+
+  useEffect(() => {
+    async function loadData() {
+      const sheetId =
+        "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"
+
+      const result = await fetchGoogleSheet(sheetId)
+
+      setData(result)
+    }
+
+    loadData()
+  }, [])
+
   return (
     <div className="w-full h-75">
       <ResponsiveContainer>
