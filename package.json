@@ -1,0 +1,13 @@
+{
+  "name": "dictbataan-opengov-portal",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w apps/web",
+    "dev:api": "npm run dev -w apps/api"
+  }
+}
